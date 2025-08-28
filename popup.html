@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Myntra Try-On</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0; 
+      padding: 20px; 
+      width: 380px; 
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #333;
+      min-height: 500px;
+    }
+    
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.1),
+        0 8px 16px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    h2 { 
+      margin: 0 0 20px; 
+      font-size: 20px; 
+      font-weight: 700;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-align: center;
+      letter-spacing: -0.5px;
+    }
+    
+    .card { 
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 16px; 
+      padding: 20px; 
+      margin-bottom: 20px; 
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+    
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    label { 
+      font-size: 14px; 
+      font-weight: 600; 
+      margin-bottom: 8px; 
+      display: block;
+      color: #4a5568;
+    }
+    
+    input[type="file"], input[type="password"], input[type="text"] { 
+      width: 100%; 
+      padding: 12px 16px; 
+      border: 2px solid #e2e8f0; 
+      border-radius: 12px; 
+      font-size: 14px;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.9);
+    }
+    
+    input[type="file"]:focus, input[type="password"]:focus, input[type="text"]:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+    
+    #preview { 
+      max-width: 100%; 
+      border-radius: 12px; 
+      margin-top: 12px; 
+      display: none;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    button.save { 
+      width: 100%; 
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff; 
+      font-size: 16px; 
+      font-weight: 700; 
+      padding: 14px 20px; 
+      border: none; 
+      border-radius: 12px; 
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    
+    button.save:hover { 
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+    }
+    
+    button.save:active {
+      transform: translateY(0);
+    }
+    
+    .hint { 
+      color: #718096; 
+      font-size: 12px; 
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+    
+    #status { 
+      margin-top: 12px; 
+      font-size: 14px;
+      font-weight: 500;
+      text-align: center;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    #status.ok { 
+      color: #059669;
+      background: rgba(5, 150, 105, 0.1);
+      border: 1px solid rgba(5, 150, 105, 0.2);
+    }
+    
+    #status.error { 
+      color: #dc2626;
+      background: rgba(220, 38, 38, 0.1);
+      border: 1px solid rgba(220, 38, 38, 0.2);
+    }
+    
+    #toggleKey { 
+      font-size: 12px; 
+      color: #667eea; 
+      cursor: pointer; 
+      margin-top: 6px; 
+      display: inline-block;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    #toggleKey:hover { 
+      text-decoration: underline;
+      color: #5a6fd8;
+    }
+    
+    .icon {
+      font-size: 24px;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2><span class="icon">👕</span>Myntra Try-On</h2>
+
+  <div class="card">
+    <label>📸 Your Photo</label>
+    <input id="photo" type="file" accept="image/*"/>
+    <div class="hint">Upload a clear front-facing photo (max 5MB)</div>
+    <img id="preview" alt="Your photo preview"/>
+  </div>
+
+  <div class="card">
+    <label>🔑 Gemini API Key</label>
+    <input id="apikey" type="password" placeholder="AIza..." />
+    <span id="toggleKey">👁️ Show</span>
+    <div class="hint">Stored securely in your browser</div>
+  </div>
+
+  <button id="save" class="save">💾 Save Settings</button>
+  <div id="status"></div>
+</div>
+
+<script src="popup.js"></script>
+</body>
+</html>

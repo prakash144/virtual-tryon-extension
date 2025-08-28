@@ -1,0 +1,123 @@
+.mto-try-btn {
+  position: absolute;
+  z-index: 99999;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border: 0;
+  border-radius: 25px;
+  padding: 12px 20px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: grab;
+  box-shadow: 
+    0 8px 25px rgba(102, 126, 234, 0.3),
+    0 4px 10px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  user-select: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 80px;
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.mto-try-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.mto-try-btn:hover::before {
+  left: 100%;
+}
+
+.mto-try-btn:hover {
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+  box-shadow: 
+    0 12px 35px rgba(102, 126, 234, 0.4),
+    0 6px 15px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transform: translateY(-3px) scale(1.02);
+}
+
+.mto-try-btn:active {
+  cursor: grabbing;
+  transform: translateY(-1px) scale(0.98);
+  box-shadow: 
+    0 4px 15px rgba(102, 126, 234, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.mto-loading {
+  opacity: 0.8;
+  pointer-events: none;
+  background: linear-gradient(135deg, #6c757d 0%, #495057 100%) !important;
+  cursor: not-allowed !important;
+  animation: premiumPulse 2s ease-in-out infinite;
+}
+
+.mto-loading:hover {
+  transform: none !important;
+  box-shadow: 
+    0 8px 25px rgba(102, 126, 234, 0.3),
+    0 4px 10px rgba(0, 0, 0, 0.1) !important;
+}
+
+@keyframes premiumPulse {
+  0%, 100% { 
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.6;
+    transform: scale(0.98);
+  }
+}
+
+/* Container for the product image */
+.mto-host {
+  position: relative;
+  display: inline-block;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Ensure the button stays within bounds with premium spacing */
+.mto-host .mto-try-btn {
+  max-width: calc(100% - 40px);
+  max-height: calc(100% - 40px);
+}
+
+/* Premium positioning - always in a good spot */
+.mto-host .mto-try-btn {
+  bottom: 20px !important;
+  right: 20px !important;
+  top: auto !important;
+  left: auto !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .mto-try-btn {
+    padding: 10px 16px;
+    font-size: 10px;
+    min-width: 70px;
+  }
+  
+  .mto-host .mto-try-btn {
+    bottom: 15px !important;
+    right: 15px !important;
+  }
+}
+
